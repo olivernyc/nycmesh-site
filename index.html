@@ -7,36 +7,27 @@
   <link rel="stylesheet" href="tachyons.min.css"/>
 </head>
 <body>
-  <header id="top-bar" class="w-100 pv2 ph3 bg-near-white-s" data-reactid=".0.1">
+  <header id="top-bar" class="w-100 pv2 ph3 bg-near-white" data-reactid=".0.1">
     <div class="dt w-100 pv2 mw8 center" data-reactid=".0.1.0">
-      <div class="dtc v-mid tl w-50" data-reactid=".0.1.0.0">
+      <div class="dtc v-mid tl w-20" data-reactid=".0.1.0.0">
         <a class="nowrap dib f5 f5 link" title="Home" href="/" data-reactid=".0.1.0.0.0">
           <p id="logo" class="ttu tracked v-btm f5 fw6 di black">
             NYC MESH
           </p>
         </a>
       </div>
-      <div class="db dtc v-mid w-100 tr">
+      <div id="right-buttons" class="dt dtc v-mid w-80 tr">
         <a class="nowrap dib mh2 f5 f5 link" title="Home" href="/" data-reactid=".0.1.0.0.0">
-          <p id="logo" class="tracked v-btm f5 fw4 di">
-            Map
-          </p>
+          <p id="logo" class="tracked v-btm f5 fw4 di">Map</p>
         </a>
         <a class="nowrap dib mh2 f5 f5 link" title="Home" href="/" data-reactid=".0.1.0.0.0">
-          <p id="logo" class="tracked v-btm f5 fw4 di">
-            FAQ
-          </p>
+          <p id="logo" class="tracked v-btm f5 fw4 di">FAQ</p>
         </a>
         <a class="nowrap dib mh2 f5 f5 link" title="Home" href="/" data-reactid=".0.1.0.0.0">
-          <p id="logo" class="tracked v-btm f5 fw4 di">
-            Meetup
-          </p>
+          <p id="logo" class="tracked v-btm f5 fw4 di">Meetup</p>
         </a>
-
         <a class="nowrap dib mh2 f5 f5 link" title="Home" href="/" data-reactid=".0.1.0.0.0">
-          <p id="logo" class="tracked v-btm f5 fw4 di">
-            Contact
-          </p>
+          <p id="logo" class="tracked v-btm f5 fw4 di">Contact</p>
         </a>
       </div>
     </div>
@@ -54,9 +45,8 @@
       var map = L.map('map');
       var layer = Tangram.leafletLayer({
           scene: 'scene.yaml',
-          attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | &copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>'
       });
       layer.addTo(map);
-      map.setView([40.70531887544228, -74.00976419448853], 15);
+      map.setView([40.70531887544228, -73.98876419448853], 14);
   </script>
 </body>
