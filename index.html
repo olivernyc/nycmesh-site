@@ -2,51 +2,86 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-  <title>NYC MESH</title>
-  <link rel="stylesheet" href="style.css"/>
-  <link rel="stylesheet" href="tachyons.min.css"/>
+  <title>NYC Mesh</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link rel="stylesheet" href="/css/tachyons.min.css"/>
 </head>
-<body>
-  <header id="top-bar" class="w-100 pv2 ph3 bg-near-white" data-reactid=".0.1">
-    <div class="dt w-100 pv2 mw8 center" data-reactid=".0.1.0">
-      <div class="dtc v-mid tl w-20" data-reactid=".0.1.0.0">
-        <a class="nowrap dib f5 f5 link" title="Home" href="/" data-reactid=".0.1.0.0.0">
-          <p id="logo" class="ttu tracked v-btm f5 fw6 di black">
+<body class="sans-serif">
+  <header id="top-bar" class="w-100 pv2 ph3 bg-near-white">
+    <div class="dt w-100 pv2 mw7 center">
+      <div class="dtc v-mid tl w-20">
+        <a class="nowrap dib f5 f5 link" title="Home" href="/">
+          <p id="logo" class="ttu tracked f5 fw6 di near-black">
             NYC MESH
           </p>
         </a>
       </div>
-      <div id="right-buttons" class="dt dtc v-mid w-80 tr">
-        <a class="nowrap dib mh2 f5 f5 link" title="Home" href="/" data-reactid=".0.1.0.0.0">
-          <p id="logo" class="tracked v-btm f5 fw4 di">Map</p>
+      <div id="right-buttons" class="dt dtc v-mid w-80 tr f6 fw5">
+        <a class="mid-gray dib ph2 pv1 link " title="map" href="/map">
+          <p id="logo" class="tracked di">Map</p>
         </a>
-        <a class="nowrap dib mh2 f5 f5 link" title="Home" href="/" data-reactid=".0.1.0.0.0">
-          <p id="logo" class="tracked v-btm f5 fw4 di">FAQ</p>
+        <a class="mid-gray dib ph2 pv1 link" title="FAQ" href="/faq">
+          <p id="logo" class="tracked di">FAQ</p>
         </a>
-        <a class="nowrap dib mh2 f5 f5 link" title="Home" href="/" data-reactid=".0.1.0.0.0">
-          <p id="logo" class="tracked v-btm f5 fw4 di">Meetup</p>
+        <a class="mid-gray dib ph2 pv1 link" title="Docs" href="/docs">
+          <p id="logo" class="tracked di">Docs</p>
         </a>
-        <a class="nowrap dib mh2 f5 f5 link" title="Home" href="/" data-reactid=".0.1.0.0.0">
-          <p id="logo" class="tracked v-btm f5 fw4 di">Contact</p>
+        <a class="mid-gray dib ph2 pv1 link" title="Blog" href="/blog">
+          <p id="logo" class="tracked di">Blog</p>
+        </a>
+        <a class="red dib pl2 pv1 link" title="Join" href="/join">
+          <p id="logo" class="tracked di">Join</p>
         </a>
       </div>
     </div>
   </header>
-  <div id="map" class="h5"></div>
-  <!-- leaflet -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2/leaflet.js"></script>
 
-  <!-- Main tangram library -->
-  <script src="https://mapzen.com/tangram/0.4/tangram.min.js"></script>
+  <!-- Intro Splash -->
+  <div id="splash2" class="bg-cv">
+    <p id="header" class='f1 fw2 ma0 tc pt4 ttu'>A New Internet</p>
+  </div>
+  <div class="black-80 tc serif pa3 pb4 mw6 center">
+    <p class="f3 lh-title"> Mesh is a new way to access the internet.</p>
+    <p class="f5 lh-copy">
+      Instead of renting access from a cable company, connect wirelessly
+      to peers in your neighborhood. Our software turns these individual links
+      into a city-spanning wifi network, separate from existing infrastructure and free from centralized control.
+    </p>
+    <!-- <p class="f5 lh-copy">We aim to build a low cost, resilient and secure alternative internet.</p>
+    <p class="f5 lh-copy">Our project is not for profit and run entirely by volunteers.</p> -->
+    <p class="f5 lh-copy">
+      <a class="no-underline" href='/join'>Get connected ></a>
+    </p>
+    <p class="f5 lh-copy">
+      <a class="no-underline" href='/docs'>View our technical documentation ></a>
+    </p>
+  </div>
 
-  <!-- Demo setup -->
-  <script>
-
-      var map = L.map('map');
-      var layer = Tangram.leafletLayer({
-          scene: 'scene.yaml',
-      });
-      layer.addTo(map);
-      map.setView([40.70531887544228, -73.98876419448853], 14);
-  </script>
+  <!-- Supernode Splash -->
+  <div id="supernode" class="bg-cv">
+    <div class="bg-black-50 h-100">
+      <p id="header" class='f2 fw2 ma0 tc pt6 ttu '>Building the Backbone</p>
+      <p class="headline white f3 tc pt4 ma0 mw6 center ph3 lh-title">We're installing a rooftop supernode on NYC's largest data center!</p>
+      <p class="headline white f3 tc pt4 ma0 no-underline"><a class="no-underline white" href="/donate">Learn more ></a></p>
+    </div>
+  </div>
+  <footer class="bg-near-white mid-gray ph3 ph5-ns pv4 pv5-ns bt b--black-10">
+    <div>
+      <a class="black-70 link dim b dib mr3" href="map" title="Map">
+        Map
+      </a>
+      <a class="black-70 link dim b dib mr3" href="docs" title="Docs">
+        FAQ
+      </a>
+      <a class="black-70 link dim b dib mr3" href="http://www.meetup.com/nycmesh" title="Components">
+        Meetup
+      </a>
+      <a class="black-70 link dim b dib mr3" href="mailto:contact@nycmesh.net" title="Components">
+        Contact
+      </a>
+      <a class="black-70 link dim b dib mr3 red" href="/join" title="Docs">
+        Join
+      </a>
+    </div>
+  </footer>
 </body>

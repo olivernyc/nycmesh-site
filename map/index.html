@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+  <title>Map / NYC Mesh</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link rel="stylesheet" href="/css/tachyons.min.css"/>
+</head>
+<body class="sans-serif">
+  <div id="map-container" class="relative">
+    <header id="top-bar" class="w-100 pv2 ph3 bg-near-white">
+      <div class="dt w-100 pv2 mw7 center">
+        <div class="dtc v-mid tl w-20">
+          <a class="nowrap dib f5 f5 link" title="Home" href="/">
+            <p id="logo" class="ttu tracked v-btm f5 fw6 di dark-gray">
+              NYC MESH
+            </p>
+          </a>
+        </div>
+        <div id="right-buttons" class="dt dtc v-mid w-80 tr f6 fw5">
+          <a class="dim mid-gray dib mv1 link selected" title="map" href="/map">
+            <p id="logo" class="tracked di">Map</p>
+          </a>
+          <a class="dim mid-gray dib ml3 mv1 link" title="FAQ" href="/faq">
+            <p id="logo" class="tracked di">FAQ</p>
+          </a>
+          <a class="dim mid-gray dib ml3 mv1 link" title="Docs" href="/docs">
+            <p id="logo" class="tracked di">Docs</p>
+          </a>
+          <a class="dim mid-gray dib ml3 mv1 link" title="Blog" href="/blog">
+            <p id="logo" class="tracked di">Blog</p>
+          </a>
+          <a class="dim mid-gray dib ml3 mv1 link red" title="Join" href="/join">
+            <p id="logo" class="tracked di">Join</p>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <div id="map"></div>
+    <footer class="bg-near-white mid-gray ph3 ph5-ns pv4 pv5-ns bt b--black-10">
+      <div>
+        <a class="black-70 link dim fw5 dib mr3" href="map" title="Map">
+          Map
+        </a>
+        <a class="black-70 link dim fw5 dib mr3" href="docs" title="Docs">
+          FAQ
+        </a>
+        <a class="black-70 link dim fw5 dib mr3" href="http://www.meetup.com/nycmesh" title="Components">
+          Meetup
+        </a>
+        <a class="black-70 link dim fw5 dib mr3" href="mailto:contact@nycmesh.net" title="Components">
+          Contact
+        </a>
+        <a class="black-70 link dim fw5 dib mr3 red" href="/join" title="Docs">
+          Join
+        </a>
+      </div>
+    </footer>
+  </div>
+
+
+
+  <script>
+      var map;
+
+      function initMap() {
+        var styles = [
+          {
+            featureType: "administrative.locality",
+            elementType: "labels",
+            stylers: [
+              { visibility: "off" }
+            ]
+          },
+          {
+            featureType: "road.highway",
+            elementType: "all",
+            stylers: [
+              // { lightness: 100 },
+              { visibility: "off" }
+            ]
+          },{
+            featureType: "road",
+            elementType: "labels",
+            stylers: [
+              { visibility: "on" }
+            ]
+          },{
+            featureType: "poi",
+            elementType: "labels",
+            stylers: [
+              { visibility: "off" }
+            ]
+          },{
+            featureType: "transit",
+            elementType: "labels",
+            stylers: [
+              { visibility: "off" }
+            ]
+          }
+        ];
+        var styledMap = new google.maps.StyledMapType(styles,
+          {name: "Styled Map"});
+
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 40.7281809, lng: -73.9595798},
+          zoom: 12,
+          disableDefaultUI: true,
+          zoomControl: true
+        });
+        map.mapTypes.set('map_style', styledMap);
+        map.setMapTypeId('map_style');
+
+        map.data.setStyle(function(feature) {
+          var status = feature.f.status;
+          var fillColor = (status == 'Installed') ? 'green' : 'gray';
+          var fillOpacity = (status == 'Installed') ? 1 : .5;
+          var zIndex = (status == 'Installed') ? 100 : 1;
+          return {
+            icon: {
+              path: google.maps.SymbolPath.CIRCLE,
+              fillColor: fillColor,
+              fillOpacity: fillOpacity,
+              strokeOpacity: fillOpacity,
+              scale: 4.5,
+              strokeColor: 'white',
+              strokeWeight: 1,
+              clickable: true
+            },
+            title: 'Node #'+feature.f.id,
+            zIndex: zIndex
+          }
+        });
+
+        map.data.loadGeoJson('/map/nodes.json');
+
+        // var infowindow = new google.maps.InfoWindow({
+        //   content: contentString
+        // });
+
+
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNClp7oJsw-eleEoR3-PQKV23tpeW-FpE&libraries=visualization&callback=initMap"
+    async defer></script>
+</body>
+</html>
