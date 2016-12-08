@@ -38,32 +38,37 @@
   </header>
 
   <div id="splash5" class="bg-cv">
-    <p id="header" class='f2 fw2 ma0 tc pt4 ttu'>Join the Mesh</p>
+    <p id="header" class='f2 fw1 ma0 tc pt4 ttu'>Join the Mesh</p>
   </div>
 
 
   <div class="bg-near-black center pv4">
     <div class="mw6 center">
-      <!-- <p class="f5 light-gray tc serif lh-copy ph4">
+      <!-- <p class="f3 white tc serif lh-copy ph4 pb3">
+        Ready to get connected?
+      </p> -->
+      <!-- <p class="f5 white tc serif lh-copy ph4 pb3">
+        Let us know where you'd like to install a node.
         We will reach out soon to discuss installation.
+        What other information needs to go in this paragraph?
       </p> -->
       <form class="mw6 ph4">
         <!-- <section> -->
-        <div class="dt w-100">
-          <div class="dtc h2  pr2">
-          <input placeholder="Your Name" type="text" class="input-reset  w-100 bg-dark-gray white br1 pa2  mr0 mv3"></input>
-        </div>
-        <div class="dtc h3 pl2">
-            <input placeholder="Email or Phone" type="text" class="input-reset w-100 bg-dark-gray white br1 mr0 pa2  mv3"></input>
+        <div class="dt w-100 white mv3">
+          <div class="dtc pr2">
+            <input placeholder="Name" type="text" class="input-reset ba b--white-05 w-100 bg-dark-gray br1 pa2"></input>
+          </div>
+          <div class="dtc pl2">
+            <input placeholder="Email or Phone" type="text" class="input-reset w-100 ba b--white-05 bg-dark-gray br1 pa2"></input>
           </div>
         </div>
         <!-- </section> -->
-        <input id="autocomplete" placeholder="Address" type="text" class="bg-dark-gray white w-100 br1 pa2 mb3"></input>
+        <input id="autocomplete" placeholder="Address" type="text" class="input-reset ba b--white-05 bg-dark-gray white w-100 br1 pa2 mb3"></input>
         <div id="map" class="h5 w-100 bg-light-silver center mb3 br1"></div>
         <input type="checkbox" class="white mb3">
           <p class="di light-gray ml1">I have roof access.</p>
         </input>
-        <input class="db w-100 pv3 ttu fw6 mb3 center br3 bg-light-gray dark-gray" type="submit" value="Submit">
+        <input class="bw0 db w-100 pv3 ttu fw6 mb3 center br3 bg-light-gray dark-gray" type="submit" value="Submit">
       </form>
     </div>
   </div>
@@ -91,44 +96,34 @@
   </footer>
 
   <script>
-      var map, autocomplete;
+      var map, autocomplete, marker;
 
       function initMap() {
         var styles = [
           {
             featureType: "administrative.locality",
             elementType: "labels",
-            stylers: [
-              { visibility: "off" }
-            ]
+            stylers: [ { visibility: "off" } ]
           },
           {
             featureType: "road",
             elementType: "geometry",
-            stylers: [
-              { lightness: 100 },
-              { visibility: "simplified" }
-            ]
+            stylers: [ { lightness: 100 }, { visibility: "simplified" } ]
           },{
             featureType: "road",
             elementType: "labels",
-            stylers: [
-              { visibility: "on" }
-            ]
+            stylers: [ { visibility: "on" } ]
           },{
             featureType: "poi",
             elementType: "labels",
-            stylers: [
-              { visibility: "off" }
-            ]
+            stylers: [ { visibility: "off" } ]
           },{
             featureType: "transit",
             elementType: "labels",
-            stylers: [
-              { visibility: "off" }
-            ]
+            stylers: [ { visibility: "off" } ]
           }
         ];
+
         var styledMap = new google.maps.StyledMapType(styles,
           {name: "Styled Map"});
 
@@ -140,6 +135,19 @@
         });
         map.mapTypes.set('map_style', styledMap);
         map.setMapTypeId('map_style');
+
+        marker = new google.maps.Marker({
+          icon: {
+            path: google.maps.SymbolPath.CIRCLE,
+            fillColor: 'blue',
+            fillOpacity: 1,
+            scale: 6,
+            strokeColor: 'white',
+            strokeWeight: 2,
+          },
+          draggable: true
+        });
+        marker.setMap(map)
 
         var search = document.getElementById('autocomplete')
         autocomplete = new google.maps.places.Autocomplete(
@@ -156,6 +164,9 @@
           var search = document.getElementById('autocomplete')
           search.value = val;
           console.log(place)
+          map.setCenter(place.geometry.location)
+          map.setZoom(17)
+          marker.setPosition(place.geometry.location)
         }
       }
     </script>

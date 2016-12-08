@@ -37,15 +37,12 @@
     </div>
   </header>
   <div id="donate-splash" class="bg-cv">
-    <p id="header" class='f2 fw2 ma0 tc pt4 ttu'>Building the Backbone</p>
+    <p id="header" class='f2 fw1 ma0 tc pt4 ttu'>Building the Backbone</p>
   </div>
 
   <!-- Letter -->
-  <div class="bg-near-white black-80 tc serif mw6 pb3 center">
-    <p class="f3 lh-title">
-      We need your support.
-    </p>
-    <p class="f5 lh-copy">
+  <div class="bg-near-white black-80 tc serif mw6 ph4 pb3 center">
+    <p class="f3 mt4 pt3 lh-title">
       NYC Mesh has big plans for 2016!
     </p>
     <p class="f5 lh-copy">
@@ -59,7 +56,7 @@
       All told, we will need around $10,000 to make this a reality.<br>
     </p>
     <p class="f5 lh-copy">
-      Please consider making a monthly donation, or a
+      Please consider making a donation below.
     </p>
     <p class="f5 lh-copy">
       Thanks,<br>
@@ -69,31 +66,48 @@
   </div>
 
   <!-- Stripe Donation -->
-  <div class="dt w-100 f3 center bg-near-black white serif">
-    <p class="f5 tc pt3">
-      Choose a monthly amount:
+  <div id="donation-amounts" class="dt w-100 f3 center bg-near-black white serif">
+    <p class="f5 tc pt4 i">
+      - Choose a monthly amount -
     </p>
-    <form action="" method="POST" class="w5 mb3 center">
-      <input type="radio" name="donation-amount" value="2000" class="mr2">$20
-      <input type="radio" name="donation-amount" value="5000" class="ml3 mr2">$50
-      <input type="radio" name="donation-amount" value="10000" class="ml3 mr2">$100
-      <!-- <p class="f5 tc light-gray">
-        Or make a one time donation:
-      </p>
-      <input type"text" name="donation-amount" placeholder="$" class="bg-near-black f4 tc w5"> -->
-    </form>
+    <div class="mw6 mt2 mb3 tc f2 center">
+      <div class="dt center">
+        <div class="w1">
+        </div>
+        <div id="twenty-monthly" onclick="setAmount('twenty-monthly')" class="button dtc mh2 w4 br2 bg-dark-gray">
+          <p class="pv0 mv3">$20</p>
+        </div>
+        <div class="w1">
+        </div>
+        <div id="fifty-monthly" onclick="setAmount('fifty-monthly')" class="button dtc mh2 w4 br2 bg-dark-gray">
+          <p class="pv0 mv3">$50</p>
+        </div>
+        <div class="w1">
+        </div>
+        <div id="hundred-monthly" onclick="setAmount('hundred-monthly')" class="button dtc mh2 w4 br2 bg-dark-gray">
+          <p class="pv0 mv3">$100</p>
+        </div>
+        <div class="w1">
+        </div>
+      </div>
+    </div>
 
-    <!-- Payment Button -->
-    <div class="pv2 mw5 f4 ttu center   w-100">
-      <div class="w-100 bg-dark-gray br3 gray">
-        <p class="tc pv2 f5 sans-serif">Pay with Card</p>
+    <p class="f5 tc pt4 i">
+      - Or make a one time donation -
+    </p>
+    <div class="mw6 mt2 mb3 tc f2 center">
+      <input id="custom" onfocus="setAmount('custom')" type"number" name="donation-amount" placeholder="$" class="tc bg-dark-gray white w4 h3 ph3 br2 bw0">
+
+      <div  class="pt4 mt4 mw5 f4 center">
+        <input id="payButton" type="submit" value="Pay with card" class="input-reset bw0 w-100 fw5 br3 pa3 sans-serif white">
+        </input>
       </div>
     </div>
 
     <!-- Donation Details -->
     <div class="gray tc serif pb3 pt2 ph4 mw6 center">
       <p class="f6 lh-copy i">
-        All funds will go towards supernode expenses and are sponsored by our fiscal partner, the <a class="no-underline light-silver" href="http://www.internetsociety.org">Internet Society</a>.
+        All funds will go towards supernode expenses and are sponsored by our fiscal partner, <a class="no-underline light-silver" href="https://isoc-ny.org">ISOC-NY</a>.
       </p>
     </div>
   </div>
@@ -118,5 +132,125 @@
       </a>
     </div>
   </footer>
+
+  <!-- handle form input -->
+  <script>
+    var donationAmount, donationType, customAmount;
+    var customDonation = document.getElementById('custom');
+    customDonation.onkeypress = function(e) {
+      // not a number
+      if (e.which < 48 || e.which > 57)
+        e.preventDefault()
+    }
+
+    customDonation.addEventListener('input', function(e) {
+      var dollars = e.target.value;
+      donationAmount = dollars*100;
+      customAmount = dollars*100;
+    })
+
+    customDonation.addEventListener('focus', function(e) {
+      var tmpStr = e.target.value;
+      console.log(tmpStr)
+      e.target.value = '';
+      e.target.value = tmpStr;
+      donationAmount = customAmount;
+    })
+
+    function setAmount(amount) {
+      // deselect selected
+      var selected = document.getElementById(donationAmount) || document.getElementById('custom');
+      if (selected) {
+        if (selected.id == 'custom')
+          selected.className = 'tc bg-dark-gray white w4 h3 ph3 br2 bw0'
+        else
+          selected.className = 'button dtc mh2 w4 br2 bg-dark-gray'
+      }
+
+      // highlight choice and set amount
+      var button = document.getElementById(amount);
+      if (amount == 'custom') {
+        console.log(button)
+        button.className = 'tc bg-dark-gray white w4 h3 ph3 br2 bw0 selected'
+        donationAmount = customAmount;
+      }
+      else {
+        button.className = 'dtc mh2 w4 br2 bg-dark-gray selected';
+        donationAmount = amount;
+      }
+    }
+  </script>
+
+
+  <script src="https://checkout.stripe.com/checkout.js"></script>
+
+  <script>
+
+    function token(token) {
+      var request = new XMLHttpRequest();
+      request.open('POST', 'https://donate.nycmesh.net/charge', true);
+      request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+      request.send(JSON.stringify({
+        stripeToken: token,
+        donationAmount: donationAmount
+      }));
+    }
+
+    var stripeConfig = {
+      key: 'pk_live_srTdi5OfErTSw5BGXqEkY9C1',
+      image: 'https://nycmesh.net:/assets/images/logo.png',
+      locale: 'auto',
+      zipCode: 'true',
+      token: token
+    }
+
+    var handler = StripeCheckout.configure(stripeConfig);
+
+    var payButton = document.getElementById('payButton');
+    payButton.addEventListener('click', function(e) {
+
+      if (parseInt(donationAmount) && donationAmount > 0) {
+        stripeConfig.bitcoin = true;
+        handler = StripeCheckout.configure(stripeConfig);
+        handler.open({
+          name: 'NYC Mesh',
+          description: 'Donation',
+          amount: donationAmount
+        });
+      }
+
+      else if (donationAmount == 'twenty-monthly')
+        handler.open({
+          name: 'NYC Mesh',
+          description: 'Monthly Donation',
+          amount: 2000
+        });
+
+      else if (donationAmount == 'fifty-monthly')
+        handler.open({
+          name: 'NYC Mesh',
+          description: 'Monthly Donation',
+          amount: 5000
+        });
+
+      else if (donationAmount == 'hundred-monthly')
+        handler.open({
+          name: 'NYC Mesh',
+          description: 'Monthly Donation',
+          amount: 10000
+        });
+
+      else {
+        alert('Please enter a valid donation amount.')
+      }
+
+      e.preventDefault();
+    });
+
+    // Close Checkout on page navigation:
+    window.addEventListener('popstate', function() {
+      handler.close();
+    });
+  </script>
 </body>
 </html>
