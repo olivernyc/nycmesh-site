@@ -1,49 +1,411 @@
 <!doctype html>
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <title>NYC Mesh</title>
-  <link rel="stylesheet" href="./css/style.css"/>
-  <link rel="stylesheet" href="./css/tachyons.min.css"/>
+  <style type="text/css">
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+    }
+
+    #right-buttons {
+      overflow: scroll;
+    }
+
+    #splash {
+      width: 100%;
+      height: 25%;
+      background-size: cover;
+      position: relative;
+      background-color: #111;
+    }
+
+    .black-gradient:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-image: linear-gradient(transparent,#111 99%);
+      /*background: radial-gradient(rgba(0, 0, 0, 0.25), #111);*/
+      opacity: 1;
+    }
+
+    html {
+      font-family: sans-serif;
+      line-height: 1.15;
+      -ms-text-size-adjust: 100%;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    header {
+      display: block;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin: .67em 0;
+    }
+
+    a {
+      background-color: transparent;
+      -webkit-text-decoration-skip: objects;
+    }
+
+    ::-webkit-file-upload-button {
+      -webkit-appearance: button;
+      font: inherit;
+    }
+
+    a,
+    body,
+    div,
+    h1,
+    header,
+    html,
+    p {
+      box-sizing: border-box;
+    }
+
+    .cover {
+      background-size: cover!important;
+    }
+
+    .br2 {
+      border-radius: .25rem;
+    }
+
+    .di {
+      display: inline;
+    }
+
+    .dib {
+      display: inline-block;
+    }
+
+    .dt {
+      display: table;
+    }
+
+    .dtc {
+      display: table-cell;
+    }
+
+    .flex {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+    }
+
+    .flex-column {
+      -webkit-box-orient: vertical;
+      -ms-flex-direction: column;
+      flex-direction: column;
+    }
+
+    .flex-column {
+      -webkit-box-direction: normal;
+    }
+
+    .items-center {
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+    }
+
+    .justify-center {
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+    }
+
+    .justify-between {
+      -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+    }
+
+    .sans-serif {
+      font-family: -apple-system,BlinkMacSystemFont,avenir next,avenir,helvetica neue,helvetica,ubuntu,roboto,noto,segoe ui,arial,sans-serif;
+    }
+
+    .serif {
+      font-family: georgia,times,serif;
+    }
+
+    .fw4 {
+      font-weight: 400;
+    }
+
+    .fw5 {
+      font-weight: 500;
+    }
+
+    .fw7 {
+      font-weight: 700;
+    }
+
+    .h-25 {
+      height: 25%;
+    }
+
+    .h-100 {
+      height: 100%;
+    }
+
+    .tracked {
+      letter-spacing: .1em;
+    }
+
+    .lh-title {
+      line-height: 1.25;
+    }
+
+    .lh-copy {
+      line-height: 1.5;
+    }
+
+    .link {
+      text-decoration: none;
+    }
+
+    .mw7 {
+      max-width: 48rem;
+    }
+
+    .w-80 {
+      width: 80%;
+    }
+
+    .near-black {
+      color: #111;
+    }
+
+    .dark-gray {
+      color: #333;
+    }
+
+    .white {
+      color: #fff;
+    }
+
+    .bg-near-black {
+      background-color: #111;
+    }
+
+    .bg-gray {
+      background-color: #777;
+    }
+
+    .bg-light-silver {
+      background-color: #aaa;
+    }
+
+    .bg-blue {
+      background-color: #357edd;
+    }
+
+    .pa1 {
+      padding: .25rem;
+    }
+
+    .pa3 {
+      padding: 1rem;
+    }
+
+    .pv1 {
+      padding-top: .25rem;
+      padding-bottom: .25rem;
+    }
+
+    .pv3 {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    .pv4 {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    .ph2 {
+      padding-left: .5rem;
+      padding-right: .5rem;
+    }
+
+    .ph3 {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .ma0 {
+      margin: 0;
+    }
+
+    .mr4 {
+      margin-right: 2rem;
+    }
+
+    .mt3 {
+      margin-top: 1rem;
+    }
+
+    .mv3 {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .mh0 {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .mh1 {
+      margin-left: .25rem;
+      margin-right: .25rem;
+    }
+
+    .tr {
+      text-align: right;
+    }
+
+    .tc {
+      text-align: center;
+    }
+
+    .ttu {
+      text-transform: uppercase;
+    }
+
+    .f3 {
+      font-size: 1.5rem;
+    }
+
+    .f4 {
+      font-size: 1.25rem;
+    }
+
+    .f5 {
+      font-size: 1rem;
+    }
+
+    .measure {
+      max-width: 30em;
+    }
+
+    .center {
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    .clip {
+      position: fixed!important;
+      _position: absolute!important;
+      clip: rect(1px 1px 1px 1px);
+      clip: rect(1px,1px,1px,1px);
+    }
+
+    .nowrap {
+      white-space: nowrap;
+    }
+
+    .v-mid {
+      vertical-align: middle;
+    }
+
+    .z-9999 {
+      z-index: 9999;
+    }
+
+    @media screen and (min-width:30em) {
+      .mt0-ns {
+        margin-top: 0;
+      }
+
+      .mv4-ns {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .mh2-ns {
+        margin-left: .5rem;
+        margin-right: .5rem;
+      }
+
+      .f4-ns {
+        font-size: 1.25rem;
+      }
+    }
+
+    @media screen and (min-width:30em) and (max-width:60em) {
+      .f2-m {
+        font-size: 2.25rem;
+      }
+    }
+
+    @media screen and (min-width:60em) {
+      .mw8-l {
+        max-width: 64rem;
+      }
+
+      .f1-l {
+        font-size: 3rem;
+      }
+    }
+
+  </style>
+  <link rel="preload" href="./css/style.css" as="style" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="./css/style.css"></noscript>
+  <link rel="preload" href="./css/tachyons.min.css" as="style" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="./css/tachyons.min.css"></noscript>
+  <script>!function(e){"use strict";var t=function(t,n,r){function o(e){return i.body?e():void setTimeout(function(){o(e)})}function a(){d.addEventListener&&d.removeEventListener("load",a),d.media=r||"all"}var l,i=e.document,d=i.createElement("link");if(n)l=n;else{var s=(i.body||i.getElementsByTagName("head")[0]).childNodes;l=s[s.length-1]}var u=i.styleSheets;d.rel="stylesheet",d.href=t,d.media="only x",o(function(){l.parentNode.insertBefore(d,n?l:l.nextSibling)});var f=function(e){for(var t=d.href,n=u.length;n--;)if(u[n].href===t)return e();setTimeout(function(){f(e)})};return d.addEventListener&&d.addEventListener("load",a),d.onloadcssdefined=f,f(a),d};"undefined"!=typeof exports?exports.loadCSS=t:e.loadCSS=t}("undefined"!=typeof global?global:this),function(e){if(e.loadCSS){var t=loadCSS.relpreload={};if(t.support=function(){try{return e.document.createElement("link").relList.supports("preload")}catch(e){return!1}},t.poly=function(){for(var t=e.document.getElementsByTagName("link"),n=0;n<t.length;n++){var r=t[n];"preload"===r.rel&&"style"===r.getAttribute("as")&&(e.loadCSS(r.href,r),r.rel=null)}},!t.support()){t.poly();var n=e.setInterval(t.poly,300);e.addEventListener&&e.addEventListener("load",function(){t.poly(),e.clearInterval(n)}),e.attachEvent&&e.attachEvent("onload",function(){e.clearInterval(n)})}}}(this);</script>
 </head>
 <body>
-  <header class="sans-serif">
-    <div class="flex-ns justify-between items-center pv3 mw8-l mw7 center">
-      <div class="ph0-ns ph2">
+  <header class="ph2 sans-serif">
+    <div class="flex justify-between items-center pv3 mw8-l mw7 center">
+      <div>
         <a class="nowrap dib link" title="Home" href="./">
-          <p id="logo" class="mh2-ns mh1 ttu tracked f3-ns f4 fw7 di near-black">
+          <p id="logo" class="mh2-ns mh1 ttu tracked f3 fw7 di near-black">
             NYC MESH
           </p>
         </a>
       </div>
-      <div id="right-buttons" class="f4-ns pa0-ns pt2 ph0-ns ph2 f5 ttu nowrap overflow-scroll">
-        <a class="mh2-ns mh1 mv1 dark-gray dib pointer link hover-blue" title="Map" href="./map">
+      <div id="right-buttons" class="dt dtc v-mid w-80 tr f4 ttu fw4">
+        <a class="mh2-ns mh1 pv1 dark-gray dib pointer link hover-blue" title="Map" href="./map">
           <p class="tracked di">Map</p>
         </a>
-        <a class="mh2-ns mh1 mv1 dark-gray dib pointer link hover-blue" title="FAQ" href="./faq">
+        <a class="mh2-ns mh1 pv1 dark-gray dib pointer link hover-blue" title="FAQ" href="./faq">
           <p class="tracked di">FAQ</p>
         </a>
-        <a class="mh2-ns mh1 mv1 dark-gray dib link hover-blue" title="Updates" href="./#updates">
+        <a class="mh2-ns mh1 pv1 dark-gray dib pointer link hover-blue" title="Updates" href="./#updates">
           <p class="tracked di">Updates</p>
         </a>
-        <a class="mh2-ns mh1 mv1 fw5 br2 dib link hover-black gold" title="Donate" href="./#donate">
+        <a class="mh2-ns mh1 pa1 ph2 white br2 dib link hover-black bg-light-silver" title="Donate" href="./#donate">
           <p class="tracked di">Donate</p>
         </a>
-        <a class="mh2-ns mh1 mv1 fw5 br2 dib link hover-black blue" title="Join" href="./#join">
+        <a class="mh2-ns mh1 pa1 ph2 white br2 dib link hover-black bg-blue" title="Join" href="./#join">
           <p class="tracked di">Join</p>
         </a>
+
       </div>
     </div>
   </header>
 
   <!-- Splash -->
-  <div id="splash5"  class="relative black-gradient cover h-25 bg-black">
-    <div  class="white h-100 tc flex items-center justify-center flex-column">
-      <h1 class="z-9999 f1-l f2  ph2 lh-title serif bg-blue-500 hg-100 u center">A new way to access the internet.</h1>
+  <div id="splash" class="black-gradient cover h-25 bg-near-black">
+    <div class="white h-100 tc flex items-center justify-center flex-column">
+      <h1 class="z-9999 f1-l f2-m f3  ph2 lh-title serif bg-blue-500 hg-100 u center">A new way to access the internet.</h1>
     </div>
   </div>
 
-  <div class="near-white bg-black f4-ns f5 pv4 ph3 lh-copy flex-ns items-center flex-column">
+  <div class="white bg-near-black f4-ns f5 pv4 ph3 lh-copy flex items-center flex-column">
     <p class="measure center">
       NYC Mesh is a community owned network. Our network consists of Wi-Fi router "nodes" spread throughout the city. The network has no central server and no single internet service provider. All nodes cooperate in the distribution of data, also serving as a stand-alone network in case of emergencies or internet shutdown.
     </p>
@@ -52,12 +414,12 @@
     </p>
     <div class="mv4-ns mv3 mh0 white">
       <div class="dib ma0 mr4">
-      <a class="nowrap dib tc-ns pa3 hover-lightest-blue white br2 link bg-blue ttu f4-ns f5 fw5" title="Join" href="./#join">
+      <a class="nowrap dib tc pa3 hover-lightest-blue white br2 link bg-blue ttu f4-ns f5 fw5" title="Join" href="./#join">
         Get connected
       </a>
     </div>
     <div class="dib ma0 mt3 mt0-ns">
-      <a class=" dib tc-ns pa3 hover-near-white white br2 link bg-gray ttu f4-ns f5 fw5" title="Donate" href="./#donate">
+      <a class=" dib tc pa3 hover-near-white white br2 link bg-gray ttu f4-ns f5 fw5" title="Donate" href="./#donate">
         Donate
       </a>
     </div>
@@ -65,7 +427,7 @@
   </div>
 
   <!-- Map -->
-  <a id="map" class="no-underline" href='./map'>
+  <a id="map" class="no-underline" href="./map">
     <div class="bg-map h-25 w-100 cover">
       <div class=" white bg-red-75 flex items-center justify-center b-black bw2">
         <h2 class="ma0 f3-ns f5 white pv3 ph2 tc">We have over 60 active nodes! View the map.</h2>
@@ -73,10 +435,10 @@
     </div>
   </a>
 
-  <section id="join" class="bg-white near-black center pv3 ph3-ns ph2">
+  <section id="join" class="bg-white near-black center pv3 ph2">
     <div class="mw9 center f4 ma3 flex-l justify-center">
 
-      <div class="measure f4 ma3-ns pa3-ns ph2 lh-copy center">
+      <div class="measure f4 ma3 pa3-ns pa2 lh-copy center">
         <h1 class="serif lh-title f2-ns f3">Want to join the mesh?</h1>
         <p class="f4-ns f5">
           Let us know where you would like to install a node.
@@ -86,33 +448,33 @@
         <p class="mid-gray f5 measure  lh-copy">Please read our <a class="blue no-underline" href="../faq">FAQ</a> and the <a class="blue no-underline" href="./documents/ncl.pdf">Network Commons License</a> before filling in the Join form.</p>
       </div>
 
-      <form class="measure f4-ns f5 bg-white br2 ma3-ns shrink-1 center">
+      <form class="measure f4-ns f5 bg-white br2 ma3 shrink-1 center">
         <div class="gray overflow-auto">
           <div class="fl w-50-l w-100 pa3-ns pa2">
             <label for="name" class="f5 b db mb2">Name</label>
-            <input placeholder="Your Name" type="text" class="input-reset  black w-100 bg-near-white ba bw1 b--light-gray br1 pa2"></input>
+            <input placeholder="Your Name" type="text" class="input-reset  black w-100 bg-near-white ba bw1 b--light-gray br1 pa2">
           </div>
           <div class="fl w-50-l w-100 pa3-ns pa2">
             <label for="phone" class="f5 b db mb2">Phone</label>
-            <input placeholder="(212) 123-4567" type="tel" class="input-reset  w-100 black bg-near-white ba bw1 b--light-gray br1 pa2"></input>
+            <input placeholder="(212) 123-4567" type="tel" class="input-reset  w-100 black bg-near-white ba bw1 b--light-gray br1 pa2">
           </div>
           <div class="fl w-50-l w-100 pa3-ns pa2">
             <label for="email" class="f5 b db mb2">Email</label>
-            <input placeholder="you@example.com" type="email" class="input-reset  w-100 black bg-near-white ba bw1 b--light-gray br1 pa2"></input>
+            <input placeholder="you@example.com" type="email" class="input-reset  w-100 black bg-near-white ba bw1 b--light-gray br1 pa2">
           </div>
           <div class="fl w-50-l w-100 pa3-ns pa2 overflow-hidden">
             <label for="panoramas" class="f5 b db mb2 nowrap">View Panorama (optional) <span class="pointer light-silver">?</span></label>
-            <input tabindex="0" type="file" name="panoramas" id="panoramas" class="inputfile" />
+            <input tabindex="0" type="file" name="panoramas" id="panoramas" class="inputfile">
             <label for="panoramas" class="dib pointer gray bg-near-white ba bw1 b--light-gray br1 pa2 nowrap truncate"><span>Choose an image</span></label>
           </div>
           <div class="fl w-100 pa3-ns pa2">
             <label for="address" class="f5 b db mb2">Street Address</label>
-            <input id="autocomplete" placeholder="285 Fulton Street, New York, NY 10007" type="text" class="input-reset  w-100 black bg-near-white ba bw1 b--light-gray br1 pa2"></input>
+            <input id="autocomplete" placeholder="285 Fulton Street, New York, NY 10007" type="text" class="input-reset  w-100 black bg-near-white ba bw1 b--light-gray br1 pa2">
           </div>
         </div>
 
         <div class="center h1 pa3 pt4 flex items-center justify-center">
-          <input type="checkbox"></input>
+          <input type="checkbox">
           <p class="ml2 mid-gray">I might have roof access!</p>
         </div>
 
@@ -126,7 +488,7 @@
 <section class="bg-purple purple-gradient white pv4 ph3 ">
   <div class="f4 lh-copy center ">
     <div class="flex center flex-row-ns flex-column  items-center-ns justify-center-ns">
-      <img class="h5 w5 dn db-l pa4" src="./images/meetup.png"></img>
+      <img class="h5 w5 dn db-l pa4" src="./images/meetup.png">
       <div class="measure f4-ns f5">
         <h1 class="serif lh-title f2-ns f3">Get involved!</h1>
 
@@ -146,75 +508,75 @@
   <div class="db flex">
   <ul class="list mw8 center pa0 dark-gray">
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/rb.jpg"></img>
+      <img class="br3 w-100 pointer" src="./images/team/rb.jpg">
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Rachel Boyce</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/cavallo.jpg"></img>
+      <img class="br3 w-100 pointer" src="./images/team/cavallo.jpg">
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Vinney Cavallo</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/jedahan.jpg"></img>
+      <img class="br3 w-100 pointer" src="./images/team/jedahan.jpg">
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Jonathan Dahan</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/julien.jpg"></img>
+      <img class="br3 w-100 pointer" src="./images/team/julien.jpg">
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Julien Deswaef</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/winston.jpg"></img>
+      <img class="br3 w-100 pointer" src="./images/team/winston.jpg">
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Winston Ford</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/nonlinear.jpg"></img>
+      <img class="br3 w-100 pointer" src="./images/team/nonlinear.jpg">
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Nicholas Frota</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/zach.jpg"></img>
+      <img class="br3 w-100 pointer" src="./images/team/zach.jpg">
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Zach Giles</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/danjg.jpg"></img>
+      <img class="br3 w-100 pointer" src="./images/team/danjg.jpg">
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Daniel Grinkevich</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/bhny.jpg"></img>
+      <img class="br3 w-100 pointer" src="./images/team/bhny.jpg">
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Brian Hall</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/samuelhermann.jpg"></img>
+      <img class="br3 w-100 pointer" src="./images/team/samuelhermann.jpg">
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Samuel Hermann</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/lisa.jpg"></img>
+      <img class="br3 w-100 pointer" src="./images/team/lisa.jpg">
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Lisa Ly</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/robamichael.jpg"></img>
+      <img class="br3 w-100 pointer" src="./images/team/robamichael.jpg">
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Rob Michael</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/c00w.jpg"></img>
+      <img class="br3 w-100 pointer" src="./images/team/c00w.jpg">
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Colin Rice</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/nitinics.jpg"></img>
+      <img class="br3 w-100 pointer" src="./images/team/nitinics.jpg">
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Nitin Sharma</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/cody.jpg"></img>
+      <img class="br3 w-100 pointer" src="./images/team/cody.jpg">
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Cody Snider</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/ksnieck.jpg"></img>
+      <img class="br3 w-100 pointer" src="./images/team/ksnieck.jpg">
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Kurt Snieckus</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/tatiana.jpg"></img>
+      <img class="br3 w-100 pointer" src="./images/team/tatiana.jpg">
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Tatiana Tylosky</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/azlyth.jpg"></img>
+      <img class="br3 w-100 pointer" src="./images/team/azlyth.jpg">
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Peter Valdez</h2>
     </li>
   </ul>
@@ -268,7 +630,7 @@
           </div>
         </label>
       </div>
-      <div class="fl w-third pa3-ns pa2">
+      <div class="fl w-third pa3-ns pa">
         <input id="fifty" type="radio" class="hidden" name="donation" value="50">
         <label for="fifty">
           <div class="pointer pa3 bg-near-white ba bw1 b--light-gray br2">
@@ -276,7 +638,7 @@
           </div>
         </label>
       </div>
-      <div class="fl w-third pa3-ns pa2">
+      <div class="fl w-third pa3-ns pa">
         <input id="hundred" type="radio" class="hidden" name="donation" value="100">
         <label for="hundred">
           <div class="pointer pa3 bg-near-white ba bw1 b--light-gray br2 fw5">
@@ -284,13 +646,13 @@
           </div>
         </label>
       </div>
-      <div class="fl w-third pa3-ns pa2">
+      <div class="fl w-third pa3-ns pa">
         <input id="custom" type="radio" class="hidden" name="donation" value="custom">
         <label for="custom">
           <!-- <div class="pointer pa3 bg-near-white ba bw1 b--light-gray br2">
             $100
           </div> -->
-          <input placeholder="$" value="$" type="text" class="relative input-reset fw5 sans-serif tc w-100 bg-near-white ba bw1 b--light-gray br1 pa3"></input>
+          <input placeholder="$" value="$" type="text" class="relative input-reset fw5 sans-serif tc w-100 bg-near-white ba bw1 b--light-gray br1 pa3">
         </label>
       </div>
     </div>
@@ -301,7 +663,7 @@
         </a>
       </div>
     </div>
-    <p class="lh-copy ph2 f5 serif gray measure center">
+    <p class="lh-copy f5 serif gray measure center">
       All funds will go towards operational expenses and are sponsored by our fiscal partner, ISOC-NY.
     </p>
   </div>
@@ -318,16 +680,16 @@
       <ul class="list pa0 ma0 f6">
         <li class="mv2">
           <time class="light-silver fw3 lh-title">February 17, 2017</time>
-          <h3 class="fw4 ma0 mv1"><a href="#" class="light-blue no-underline lh-title">Install Info</a></h2>
-        </li>
+          <h3 class="fw4 ma0 mv1"><a href="#" class="light-blue no-underline lh-title">Install Info</a>
+        </h3></li>
         <li class="mv4">
           <time class="light-silver fw3 lh-title">February 6, 2017</time>
-          <h3 class="fw4 ma0 mv1"><a href="#" class="light-blue no-underline lh-title">Presentations</a></h2>
-        </li>
+          <h3 class="fw4 ma0 mv1"><a href="#" class="light-blue no-underline lh-title">Presentations</a>
+        </h3></li>
         <li class="mv4">
           <time class="light-silver fw3 lh-title">February 3, 2017</time>
-          <h3 class="fw4 ma0 mv1"><a href="#" class="light-blue no-underline lh-title">Ethernet</a></h2>
-        </li>
+          <h3 class="fw4 ma0 mv1"><a href="#" class="light-blue no-underline lh-title">Ethernet</a>
+        </h3></li>
       </ul>
     </div>
     <div class="fl-ns w-25-ns w-100 ph3-ns pa0">
@@ -335,43 +697,43 @@
       <ul class="list pa0 ma0 f6">
         <li class="mv2">
           <time class="light-silver fw3 lh-title">Motherboard</time>
-          <h3 class="fw4 ma0 mv1"><a href="https://motherboard.vice.com/en_us/article/how-a-diy-network-plans-to-subvert-time-warner-cables-nyc-internet-monopoly" class="light-blue no-underline lh-title">How a DIY Network Plans to Subvert Time Warner Cable's NYC Internet Monopoly</a></h2>
-        </li>
+          <h3 class="fw4 ma0 mv1"><a href="https://motherboard.vice.com/en_us/article/how-a-diy-network-plans-to-subvert-time-warner-cables-nyc-internet-monopoly" class="light-blue no-underline lh-title">How a DIY Network Plans to Subvert Time Warner Cable's NYC Internet Monopoly</a>
+        </h3></li>
         <li class="mv4">
           <time class="light-silver fw3 lh-title">Downtown Express</time>
-          <h3 class="fw4 ma0 mv1"><a href="http://www.downtownexpress.com/2016/01/12/hooking-up-downtown-with-free-resilient-wi-fi/" class="light-blue no-underline lh-title">Hooking up Downtown with Free, Resilient <span class="nowrap">Wi-Fi</span></a></h2>
-        </li>
+          <h3 class="fw4 ma0 mv1"><a href="http://www.downtownexpress.com/2016/01/12/hooking-up-downtown-with-free-resilient-wi-fi/" class="light-blue no-underline lh-title">Hooking up Downtown with Free, Resilient <span class="nowrap">Wi-Fi</span></a>
+        </h3></li>
         <li class="mv4">
           <time class="light-silver fw3 lh-title">Fast Company</time>
-          <h3 class="fw4 ma0 mv1"><a href="https://www.fastcompany.com/3044686/mesh-networks-and-the-local-internet-movement" class="light-blue no-underline lh-title">Why Communities are Building an Internet that's More Local</a></h2>
-        </li>
+          <h3 class="fw4 ma0 mv1"><a href="https://www.fastcompany.com/3044686/mesh-networks-and-the-local-internet-movement" class="light-blue no-underline lh-title">Why Communities are Building an Internet that's More Local</a>
+        </h3></li>
       </ul>
     </div>
-    <div class="fl-ns w-50-ns w-100 ph3-ns pa0 overflow-auto">
+    <div class="fl-ns w-50-ns w-100 ph3-ns pa0">
       <h2 class="fw5 f4">Videos</h2>
       <ul class="list pa0 ma0 f6">
-        <li class="fl w-50 pr3 mv0-ns">
+        <li class="fl w-50-ns w-100 pr3 mv0-ns">
           <time class="light-silver fw3 lh-title">February 7, 2017 Meetup</time>
-          <a class="mt1 db " href="https://www.youtube.com/watch?v=0vsiI3accB8"><img class="w-100 ma0 pa0 br1 mv1" src="./images/video1.jpg"></img></a>
-          <h3 class="fw4 ma0"><a href="https://www.youtube.com/watch?v=0vsiI3accB8" class="light-blue no-underline lh-title">How to help build our network</a></h2>
-        </li>
-        <li class="fl w-50 pr3 mv0-ns">
+          <a class="mt1 db " href="https://www.youtube.com/watch?v=0vsiI3accB8"><img class="w-100 ma0 pa0 br1 mv1" src="./images/video1.jpg"></a>
+          <h3 class="fw4 ma0"><a href="https://www.youtube.com/watch?v=0vsiI3accB8" class="light-blue no-underline lh-title">How to help build our network</a>
+        </h3></li>
+        <li class="fl w-50-ns w-100 pr3 mv0-ns">
           <time class="light-silver fw3 lh-title">January 10, 2017 Meetup</time>
-          <a class="mt1 db " href="https://www.youtube.com/watch?v=p2QQjIfvGgA"><img class="w-100 ma0 pa0 br1 mv1" src="./images/video2.jpg"></img></a>
-          <h3 class="fw4 ma0"><a href="https://www.youtube.com/watch?v=p2QQjIfvGgA" class="light-blue no-underline lh-title">Building a community owned network</a></h2>
-        </li>
+          <a class="mt1 db " href="https://www.youtube.com/watch?v=p2QQjIfvGgA"><img class="w-100 ma0 pa0 br1 mv1" src="./images/video2.jpg"></a>
+          <h3 class="fw4 ma0"><a href="https://www.youtube.com/watch?v=p2QQjIfvGgA" class="light-blue no-underline lh-title">Building a community owned network</a>
+        </h3></li>
       </ul>
     </div>
   </div>
 
-  <div class="pa4-ns pv4">
-    <form class="bg-dark-gray mw6-ns center pa4 br2">
+  <div class="pa4-ns">
+    <form class="bg-dark-gray mw7-ns center pa4 br2">
       <fieldset class="cf bn ma0 pa0">
-        <legend class="pa0 f4 mb3 white">Stay updated! Subscribe to our newsletter.</legend>
+        <legend class="pa0 f4 f3-ns mb3 white">Stay updated! Subscribe to our newsletter.</legend>
         <div class="cf">
           <label class="clip" for="email-address">Email Address</label>
-          <input class="f5 input-reset bn fl black-80 bg-near-white pa3 lh-solid w-100 w-75-ns br2 br--left-ns" placeholder="Your Email Address" type="text" name="email-address" value="" id="email-address">
-          <input class="f5 ttu button-reset fl pv3 tc bn bg-animate bg-green hover-bg-dark-green white pointer w-100 mv3 mv0-ns w-25-ns br2 br--right-ns" type="submit" value="Subscribe">
+          <input class="f4 input-reset bn fl black-80 bg-near-white pa3 lh-solid w-100 w-75-ns br2 br--left-ns" placeholder="Your Email Address" type="text" name="email-address" value="" id="email-address">
+          <input class="f4 ttu button-reset fl pv3 tc bn bg-animate bg-green hover-bg-dark-green white pointer w-100 mv3 mv0-ns w-25-ns br2 br--right-ns" type="submit" value="Subscribe">
         </div>
       </fieldset>
     </form>
@@ -379,7 +741,7 @@
 </section>
 
 
-  <footer class="bg-black flex-ns justify-between items-center white ph3 ph5-ns pv4 pv5-ns">
+  <footer class="bg-near-black flex-ns justify-between items-center white ph3 ph5-ns pv4 pv5-ns">
     <div class="f4 ttu fw7">
       <a class="mh2-ns mh1 pa0 near-white pointer link hover-blue" title="Map" href="./map">
         <p class="tracked di">Map</p>
@@ -387,16 +749,15 @@
       <a class="mh2-ns mh1 pa0 near-white pointer link hover-blue" title="FAQ" href="./faq">
         <p class="tracked di">FAQ</p>
       </a>
+      <a class="mh2-ns mh1 pa0 near-white pointer link hover-blue" title="Donate" href="./donate">
+        <p class="tracked di">Donate</p>
+      </a>
+      <a class="mh2-ns mh1 pa0 near-white pointer link hover-blue" title="Join" href="./join">
+        <p class="tracked di">Join</p>
+      </a>
       <a class="mh2-ns mh1 pa0 near-white pointer link hover-blue" title="Join" href="mailto:contact@nycmesh.net">
         <p class="tracked di">Contact</p>
       </a>
-      <a class="mh2-ns mh1 pa0 gold pointer link hover-blue" title="Donate" href="./donate">
-        <p class="tracked di">Donate</p>
-      </a>
-      <a class="mh2-ns mh1 pa0 blue pointer link hover-blue" title="Join" href="./join">
-        <p class="tracked di">Join</p>
-      </a>
-
   </div>
 
     <div class="flex items-center j">
@@ -457,6 +818,5 @@ Array.prototype.forEach.call( inputs, function( input )
         }
       }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNClp7oJsw-eleEoR3-PQKV23tpeW-FpE&libraries=places&callback=initMap"
-    async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNClp7oJsw-eleEoR3-PQKV23tpeW-FpE&libraries=places&callback=initMap" async defer></script>
 </body>

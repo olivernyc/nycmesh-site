@@ -2,148 +2,133 @@
 <html>
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Map / NYC Mesh</title>
-  <link rel="stylesheet" href="/css/style.css"/>
-  <link rel="stylesheet" href="/css/tachyons.min.css"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="../css/tachyons.min.css"/>
 </head>
 <body class="sans-serif">
-  <div id="map-container" class="relative">
-    <header id="top-bar" class="w-100 pv2 ph3 bg-near-white">
-      <div class="dt w-100 pv2 mw7 center">
-        <div class="dtc v-mid tl w-20">
-          <a class="nowrap dib f5 f5 link" title="Home" href="/">
-            <p id="logo" class="ttu tracked v-btm f5 fw6 di dark-gray">
-              NYC MESH
-            </p>
-          </a>
-        </div>
-        <div id="right-buttons" class="dt dtc v-mid w-80 tr f6 fw5">
-          <a class="dim mid-gray dib mv1 link selected" title="map" href="/map">
-            <p id="logo" class="tracked di">Map</p>
-          </a>
-          <a class="dim mid-gray dib ml3 mv1 link" title="FAQ" href="/faq">
-            <p id="logo" class="tracked di">FAQ</p>
-          </a>
-          <a class="dim mid-gray dib ml3 mv1 link" title="Docs" href="/docs">
-            <p id="logo" class="tracked di">Docs</p>
-          </a>
-          <a class="dim mid-gray dib ml3 mv1 link" title="Blog" href="/blog">
-            <p id="logo" class="tracked di">Blog</p>
-          </a>
-          <a class="dim mid-gray dib ml3 mv1 link red" title="Join" href="/join">
-            <p id="logo" class="tracked di">Join</p>
-          </a>
-        </div>
+  <!-- <div id="map-container" class="relative"> -->
+  <header class="sans-serif">
+    <div class="flex-ns justify-between items-center pv3 mw8-l mw7 center">
+      <div class="ph0-ns ph2">
+        <a class="nowrap dib link" title="Home" href="../">
+          <p id="logo" class="mh2-ns mh1 ttu tracked f3-ns f4 fw7 di near-black">
+            NYC MESH
+          </p>
+        </a>
       </div>
-    </header>
+      <div id="right-buttons" class="f4-ns pa0-ns pt2 ph0-ns ph2 f5 ttu nowrap overflow-scroll">
+        <a class="b mh2-ns mh1 mv1 dark-gray dib pointer link hover-blue" title="Map" href="../map">
+          <p class="tracked di">Map</p>
+        </a>
+        <a class="mh2-ns mh1 mv1 dark-gray dib pointer link hover-blue" title="FAQ" href="../faq">
+          <p class="tracked di">FAQ</p>
+        </a>
+        <a class="mh2-ns mh1 mv1 dark-gray dib link hover-blue" title="Updates" href="../#updates">
+          <p class="tracked di">Updates</p>
+        </a>
+        <a class="mh2-ns mh1 mv1 fw5 br2 dib link hover-black gold" title="Donate" href="../#donate">
+          <p class="tracked di">Donate</p>
+        </a>
+        <a class="mh2-ns mh1 mv1 fw5 br2 dib link hover-black blue" title="Join" href="../#join">
+          <p class="tracked di">Join</p>
+        </a>
+      </div>
+    </div>
+  </header>
 
-    <div id="map"></div>
-    <footer class="bg-near-white mid-gray ph3 ph5-ns pv4 pv5-ns bt b--black-10">
-      <div>
-        <a class="black-70 link dim fw5 dib mr3" href="map" title="Map">
-          Map
-        </a>
-        <a class="black-70 link dim fw5 dib mr3" href="docs" title="Docs">
-          FAQ
-        </a>
-        <a class="black-70 link dim fw5 dib mr3" href="http://www.meetup.com/nycmesh" title="Components">
-          Meetup
-        </a>
-        <a class="black-70 link dim fw5 dib mr3" href="mailto:contact@nycmesh.net" title="Components">
-          Contact
-        </a>
-        <a class="black-70 link dim fw5 dib mr3 red" href="/join" title="Docs">
-          Join
-        </a>
-      </div>
-    </footer>
+  <div class="h-75">
+    <div id="map" class="h-100"></div>
   </div>
 
+  <div class="bg-near-white pt4 pb5">
+  <div class='measure center f4 lh-copy near-black'>
+    <p>This map shows our node locations. The colored markers are currently active nodes. The gray markers are potential nodes from the join form. We are currently working to turn these into active nodes.</p>
+    <p>We have over 60 active nodes and are adding about one or two per week.</p>
+    <p>Neighborhoods have different organizers. You can email them directly below. If you would like to volunteer for your neighborhood please email us.</p>
 
+    <h2>Manhattan</h2>
 
-  <script>
-      var map;
+    <p>UWS - Oliver</p>
+    <p>Downtown (Tribeca/SoHo/Financial/West Village) - Bob</p>
+    <p>Chinatown - Arthur</p>
+    <p>East Village/LES - Brian</p>
+    <p>Lower East Side - James</p>
+    <p>East Harlem - Rob J</p>
 
-      function initMap() {
-        var styles = [
-          {
-            featureType: "administrative.locality",
-            elementType: "labels",
-            stylers: [
-              { visibility: "off" }
-            ]
-          },
-          {
-            featureType: "road.highway",
-            elementType: "all",
-            stylers: [
-              // { lightness: 100 },
-              { visibility: "off" }
-            ]
-          },{
-            featureType: "road",
-            elementType: "labels",
-            stylers: [
-              { visibility: "on" }
-            ]
-          },{
-            featureType: "poi",
-            elementType: "labels",
-            stylers: [
-              { visibility: "off" }
-            ]
-          },{
-            featureType: "transit",
-            elementType: "labels",
-            stylers: [
-              { visibility: "off" }
-            ]
-          }
-        ];
-        var styledMap = new google.maps.StyledMapType(styles,
-          {name: "Styled Map"});
+    <h2>Brooklyn</h2>
 
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 40.7281809, lng: -73.9595798},
-          zoom: 12,
-          disableDefaultUI: true,
-          zoomControl: true
-        });
-        map.mapTypes.set('map_style', styledMap);
-        map.setMapTypeId('map_style');
+    <p>Fort Greene/Clinton Hill - Dylan</p>
+    <p>East Williamsburg/Bushwick - Joel</p>
+    <p>Bushwick - Myf</p>
 
-        map.data.setStyle(function(feature) {
-          var status = feature.f.status;
-          var fillColor = (status == 'Installed') ? 'green' : 'gray';
-          var fillOpacity = (status == 'Installed') ? 1 : .5;
-          var zIndex = (status == 'Installed') ? 100 : 1;
-          return {
-            icon: {
-              path: google.maps.SymbolPath.CIRCLE,
-              fillColor: fillColor,
-              fillOpacity: fillOpacity,
-              strokeOpacity: fillOpacity,
-              scale: 4.5,
-              strokeColor: 'white',
-              strokeWeight: 1,
-              clickable: true
-            },
-            title: 'Node #'+feature.f.id,
-            zIndex: zIndex
-          }
-        });
+    <h2>Queens</h2>
 
-        map.data.loadGeoJson('/map/nodes.json');
+    <p>Sunnyside - Shawn</p>
+    <p>Jackson Heights - Tom</p>
+    <p>Woodside – Calvin</p>
 
-        // var infowindow = new google.maps.InfoWindow({
-        //   content: contentString
-        // });
+    <h2>Bronx</h2>
 
+    South Bronx - RB
+  </div>
 
-      }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNClp7oJsw-eleEoR3-PQKV23tpeW-FpE&libraries=visualization&callback=initMap"
-    async defer></script>
+  </div>
+
+  <div class="pa5-ns bg-near-black">
+    <form class="bg-dark-gray mw7-ns center pa4 br2-ns">
+      <fieldset class="cf bn ma0 pa0">
+        <legend class="pa0 f4 f3-ns mb3 white">Sign up for our newsletter</legend>
+        <div class="cf">
+          <label class="clip" for="email-address">Email Address</label>
+          <input class="f4 input-reset bn fl black-80 bg-near-white pa3 lh-solid w-100 w-75-ns br2 br--left-ns" placeholder="Your Email Address" type="text" name="email-address" value="" id="email-address">
+          <input class="f4 ttu button-reset fl pv3 tc bn bg-animate bg-green hover-bg-dark-green white pointer w-100 mv3 mv0-ns w-25-ns br2 br--right-ns" type="submit" value="Subscribe">
+        </div>
+      </fieldset>
+    </form>
+  </div>
+
+  <footer class="flex justify-between items-center bg-white mid-gray ph3 ph5-ns pv4 pv5-ns">
+    <div class="f4 ttu fw7">
+      <a class="mh2-ns mh1 pa0 dark-gray pointer link hover-blue" title="Map" href="./map">
+        <p class="tracked di">Map</p>
+      </a>
+      <a class="mh2-ns mh1 pa0 dark-gray pointer link hover-blue" title="Blog" href="./blog">
+        <p class="tracked di">Blog</p>
+      </a>
+      <a class="mh2-ns mh1 pa0 dark-gray pointer link hover-blue" title="FAQ" href="./faq">
+        <p class="tracked di">FAQ</p>
+      </a>
+      <a class="mh2-ns mh1 pa2 white pv1 br2 link hover-black bg-light-silver" title="Donate" href="./donate">
+        <p class="tracked di">Donate</p>
+      </a>
+      <a class="mh2-ns mh1 pa2 white pv1 br2 link hover-black bg-blue" title="Join" href="./join">
+        <p class="tracked di">Join</p>
+      </a>
+
+  </div>
+    <!-- <div>
+      <a class="black-70 link hover-blue b dib mr3" href="https://twitter.com/nycmesh">
+        <svg viewBox="0 0 300.00006 244.18703" height="24.419" width="30" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+         <g style="" transform="translate(-539.18 -568.86)">
+          <path d="m633.9 812.04c112.46 0 173.96-93.168 173.96-173.96 0-2.6463-0.0539-5.2806-0.1726-7.903 11.938-8.6302 22.314-19.4 30.498-31.66-10.955 4.8694-22.744 8.1474-35.111 9.6255 12.623-7.5693 22.314-19.543 26.886-33.817-11.813 7.0031-24.895 12.093-38.824 14.841-11.157-11.884-27.041-19.317-44.629-19.317-33.764 0-61.144 27.381-61.144 61.132 0 4.7978 0.5364 9.4646 1.5854 13.941-50.815-2.5569-95.874-26.886-126.03-63.88-5.2508 9.0354-8.2785 19.531-8.2785 30.73 0 21.212 10.794 39.938 27.208 50.893-10.031-0.30992-19.454-3.0635-27.69-7.6468-0.009 0.25652-0.009 0.50661-0.009 0.78077 0 29.61 21.075 54.332 49.051 59.934-5.1376 1.4006-10.543 2.1516-16.122 2.1516-3.9336 0-7.766-0.38716-11.491-1.1026 7.7838 24.293 30.355 41.971 57.115 42.465-20.926 16.402-47.287 26.171-75.937 26.171-4.929 0-9.7983-0.28036-14.584-0.84634 27.059 17.344 59.189 27.464 93.722 27.464" fill="#1da1f2"/>
+         </g>
+        </svg>
+      </a>
+    </div> -->
+
+    <div class="flex items-center j">
+      <span class="f6  tr">This project was made possible in part by a grant from the Internet Society.</span>
+      <!-- <div class='isoc-logo h2 w4'></div> -->
+      <img class="h2 o-60 ml4" src="../images/isoc-logo.png"></img>
+    </div>
+
+  </footer>
+
+  <script src="./map.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNClp7oJsw-eleEoR3-PQKV23tpeW-FpE&libraries=visualization&callback=initMap"
+  async defer></script>
+
 </body>
 </html>
