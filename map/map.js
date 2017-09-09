@@ -3,138 +3,327 @@ var map;
 function initMap() {
   var styles = [
     {
-      featureType: "administrative.locality",
-      elementType: "labels",
+      featureType: "road",
+      elementType: "labels.text.fill",
       stylers: [
-        { visibility: "off" }
+        {
+          color: "#CCCCCC"
+        }
+      ]
+    },
+    {
+      featureType: "poi",
+      elementType: "labels",
+      stylers: [{ visibility: "off" }]
+    },
+    {
+      elementType: "geometry",
+      stylers: [
+        {
+          color: "#f5f5f5"
+        }
+      ]
+    },
+    {
+      "featureType": "landscape",
+      "elementType": "labels",
+      "stylers": [
+        {
+          "visibility": "off"
+        }
+      ]
+    },
+    {
+      elementType: "labels.icon",
+      stylers: [
+        {
+          visibility: "off"
+        }
+      ]
+    },
+    {
+      elementType: "labels.text.stroke",
+      stylers: [
+        {
+          color: "#f5f5f5"
+        }
+      ]
+    },
+    {
+      featureType: "administrative",
+      stylers: [
+        {
+          visibility: "off"
+        }
+      ]
+    },
+    {
+      featureType: "poi",
+      stylers: [
+        {
+          visibility: "off"
+        }
+      ]
+    },
+    {
+      featureType: "road",
+      elementType: "geometry",
+      stylers: [
+        {
+          color: "#ffffff"
+        }
+      ]
+    },
+    {
+      featureType: "road",
+      elementType: "labels.icon",
+      stylers: [
+        {
+          visibility: "off"
+        }
       ]
     },
     {
       featureType: "road.highway",
-      elementType: "all",
       stylers: [
-        { visibility: "off" }
+        {
+          visibility: "off"
+        }
       ]
-    },{
-      featureType: "road",
-      elementType: "labels",
+    },
+    {
+      featureType: "road.highway",
+      elementType: "geometry",
       stylers: [
-        { visibility: "on" }
+        {
+          color: "#dadada"
+        }
       ]
-    },{
-      featureType: "poi",
-      elementType: "labels",
-      stylers: [
-        { visibility: "off" }
-      ]
-    },{
+    },
+    {
       featureType: "transit",
-      elementType: "labels",
       stylers: [
-        { visibility: "off" }
+        {
+          visibility: "off"
+        }
+      ]
+    },
+    {
+      featureType: "water",
+      elementType: "geometry",
+      stylers: [
+        {
+          color: "#d9d9d9"
+        }
+      ]
+    },
+    {
+      featureType: "water",
+      elementType: "labels.text.fill",
+      stylers: [
+        {
+          color: "#9e9e9e"
+        }
       ]
     }
   ];
-  var styledMap = new google.maps.StyledMapType(styles, {name: "Styled Map"});
+  var styledMap = new google.maps.StyledMapType(styles, { name: "Styled Map" });
 
   var mapOptions = {
-    center: {lat: 40.7281809, lng: -73.9595798},
+    center: { lat: 40.7281809, lng: -73.9595798 },
     zoom: 13,
-    disableDefaultUI: true,
+    disableDefaultUI: false,
     zoomControl: true,
-    scrollwheel: false
-  }
+    scrollwheel: false,
+    streetViewControl: false,
+    mapTypeControlOptions: {
+      style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+      position: google.maps.ControlPosition.RIGHT_TOP
+    }
+  };
 
-  var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-  map.mapTypes.set('map_style', styledMap);
-  map.setMapTypeId('map_style');
+  var map = new google.maps.Map(document.getElementById("map-div"), mapOptions);
+  map.mapTypes.set("map_style", styledMap);
+  map.setMapTypeId("map_style");
 
   var activeNodesLayer = new google.maps.Data();
   var potentialNodesLayer = new google.maps.Data();
   var linksLayer = new google.maps.Data();
+  var linkNYCLayer = new google.maps.Data();
   // var beamsLayer = new google.maps.Data();
-  activeNodesLayer.loadGeoJson('./nodes/active.json');
-  potentialNodesLayer.loadGeoJson('./nodes/potential.json');
-  linksLayer.loadGeoJson('./nodes/links.json');
+  activeNodesLayer.loadGeoJson("./nodes/active.json");
+  potentialNodesLayer.loadGeoJson("./nodes/potential.json");
+  linksLayer.loadGeoJson("./nodes/links.json");
+  linkNYCLayer.loadGeoJson("./nodes/linkNYC.json");
   // beamsLayer.addGeoJson({"type":"Feature","geometry":{"coordinates":[-74.001122,40.711137],"type":"Point"}});
 
-  activeNodesLayer.setStyle({
-    icon: {
-      url: '../images/active.svg',
-      anchor: new google.maps.Point(10, 10),
+  /* activeNodesLayer.setStyle({
+		    icon: {
+		      url: '../assets/images/active.svg',
+		      anchor: new google.maps.Point(10, 10),
+		    }
+		  })
+		*/
+
+  //attempt at changing icon for each marker
+  /*
+		  activeNodesLayer.setStyle(function(feature) {
+		    return {icon:feature.getProperty('icon'),
+		    anchor: new google.maps.Point(10, 10),
+		    }
+		  })
+         */
+
+  //changing icon opacity to show it has panoramas, also set supernode icon
+  activeNodesLayer.setStyle(function(feature) {
+    var url = "../assets/images/active.svg";
+    var opacity = 0.5;
+    var notes = feature.getProperty("notes").toLowerCase();
+    if (notes.indexOf("supernode") !== -1) {
+      url = "../assets/images/supernode.svg";
     }
-  })
+    if (feature.getProperty("panoramas")) {
+      //url = '../assets/images/activepano.svg';
+      opacity = 1;
+    }
+    return {
+      scaledSize: new google.maps.Size(50, 50),
+      title: feature.getProperty("id"),
+      opacity: opacity,
+      zIndex: 200,
+      icon: {
+        url: url,
+        anchor: new google.maps.Point(10, 10)
+      }
+    };
+  });
 
-  potentialNodesLayer.setStyle({
-    icon: {
-      url: '../images/potential.svg',
-      anchor: new google.maps.Point(10, 10),
-    },
-    zIndex: -1
-  })
+  potentialNodesLayer.setStyle(function(feature) {
+    var url = "../assets/images/potential.svg";
+    var opacity = 0.5;
+    var notes = feature.getProperty("notes").toLowerCase();
+    if (notes.indexOf("supernode") !== -1) {
+      url = "../assets/images/supernode-potential.svg";
+    }
+    if (feature.getProperty("panoramas")) {
+      //url = '../assets/images/potentialpano.svg';
+      opacity = 1;
+    }
+    return {
+      scaledSize: new google.maps.Size(50, 50),
+      title: feature.getProperty("id"),
+      opacity: opacity,
+      zIndex: 100,
+      icon: {
+        url: url,
+        anchor: new google.maps.Point(10, 10)
+      }
+    };
+  });
 
-  linksLayer.setStyle(function (link) {
-    var strokeColor = 'red';
-    var opacity = 1;
-    if (link.getProperty('status') != 'active') {
-      strokeColor = 'gray';
-      opacity = 0.5
+  /*
+		  potentialNodesLayer.setStyle({
+		    icon: {
+		      url: '../assets/images/potential.svg',
+		      anchor: new google.maps.Point(10, 10),
+		    },
+		    zIndex: -1
+		  })
+          */
+
+  linksLayer.setStyle(function(link) {
+    var strokeColor = "#ff3b30";
+    var opacity = 0.5;
+    if (link.getProperty("status") != "active") {
+      strokeColor = "gray";
+      opacity = 0.25;
     }
     return {
       zIndex: 999,
-      strokeWeight: 4,
+      strokeWeight: 2,
       strokeColor: strokeColor,
       strokeOpacity: opacity
-    }
-  })
+    };
+  });
+
+  linkNYCLayer.setStyle(function(feature) {
+    var url = "../assets/images/linkNYC.svg";
+    var opacity = 0.5;
+    return {
+      scaledSize: new google.maps.Size(50, 50),
+      title: feature.getProperty("id"),
+      opacity: opacity,
+      zIndex: 9,
+      icon: {
+        url: url,
+        anchor: new google.maps.Point(10, 10)
+      }
+    };
+  });
 
   // beamsLayer.setStyle({
   //   icon: {
-  //     url: '../images/supernode.svg',
+  //     url: '../assets/images/supernode.svg',
   //     anchor: new google.maps.Point(0, 0),
   //   },
   //   zIndex: -1
   // })
 
   var infowindow = new google.maps.InfoWindow();
-  activeNodesLayer.addListener('click', openInfoWindow);
-  potentialNodesLayer.addListener('click', openInfoWindow);
+  activeNodesLayer.addListener("click", openInfoWindow);
+  potentialNodesLayer.addListener("click", openInfoWindow);
 
-  linksLayer.setMap(map)
-  activeNodesLayer.setMap(map)
-  potentialNodesLayer.setMap(map)
-  beamsLayer.setMap(map)
+  linksLayer.setMap(map);
+  linkNYCLayer.setMap(map);
+  potentialNodesLayer.setMap(map);
+  activeNodesLayer.setMap(map);
 
   function openInfoWindow(event) {
     // replace this with a fully custom overlay
-    var content = "<div class='pv3'>"
-    content += "<h2 class='di pr2'>Node "+event.feature.f.id+"</h2>"
+    var content = "<div class='pv3'>";
+    content +=
+      "<h2 class='di pr2'>Node " +
+      event.feature.f.id +
+      "" +
+      event.feature.f.otherNodes +
+      "</h2>";
 
-    if (event.feature.f.status == 'Installed') {
-      content += "<h3 class='di green fw4'>Active</h3>"
+    if (event.feature.f.status == "Installed") {
+      content +=
+        "<h3 class='di green fw4'>Active</h3><br>" + event.feature.f.notes;
+    } else {
+      content +=
+        "<h3 class='di gray fw4'>Potential</h3><br>" + event.feature.f.notes;
     }
-    else {
-      content += "<h3 class='di gray fw4'>Potential</h3>"
-    }
 
-    content += "</div>"
+    content += "</div>";
 
-    var panoramas = event.feature.f.panoramas
+    var panoramas = event.feature.f.panoramas;
     if (panoramas) {
-      content += "<h4 class='pb2 mv0 mb3 near-black fw4'>View from this node:</h3>"
+      content +=
+        "<h4 class='pb2 mv0 mb3 near-black fw4'>View from this node:</h3>";
       for (var i = 0; i < panoramas.length; i++) {
-        var image = "<div class='w6'>"+
-        "<a href='"+'../panoramas/'+panoramas[i]+"'>"
-        image += "<img class='w-100 h-100 contain' src='"+'../panoramas/'+panoramas[i]+"'></img>"
-        image += "</a>"+
-        "</div";
+        var image =
+          "<div class='w6'>" +
+          "<a href='" +
+          "../panorama/" +
+          panoramas[i] +
+          "'>";
+        image +=
+          "<img class='w-100 h-100 contain' src='" +
+          "../panorama/" +
+          panoramas[i] +
+          "'></img>";
+        image += "</a>" + "</div";
 
         content += image;
       }
     }
-     infowindow.setContent(content);
-     infowindow.setPosition(event.feature.getGeometry().get());
-     infowindow.setOptions({pixelOffset: new google.maps.Size(-1,-8)});
-     infowindow.open(map);
+    infowindow.setContent(content);
+    infowindow.setPosition(event.feature.getGeometry().get());
+    infowindow.setOptions({ pixelOffset: new google.maps.Size(-1, -8) });
+    infowindow.open(map);
+    //setTimeout(infowindow.close(map), 0) // needs a timeout delay to force the autoscroll !!
+    setTimeout(infowindow.open(map), 10000); // needs a timeout delay to force the autoscroll !!
   }
 }
