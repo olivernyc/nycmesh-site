@@ -265,7 +265,7 @@ function showDetails(event) {
   }
   if (node.panoramas) {
     String(node.panoramas).split(',').forEach(function(panorama) {
-      infoWindow.innerHTML += '<img class="w-100 mv2" src="/panorama/'+panorama+'"></img>'
+      infoWindow.innerHTML += '<img class="w-100 mv2" src="./panorama/'+panorama+'"></img>'
     })
   }
   infoWindow.classList.add('db');
