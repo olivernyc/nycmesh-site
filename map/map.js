@@ -249,7 +249,7 @@ function showDetails(event) {
   infoWindow.innerHTML = '<div class="flex items-center justify-between">'+'<h2 class="mv0">Node #'+node.id+'</h2>'+'<h3 class="mv0 '+node.status+'">'+node.status+'</h3>'+'</div>'
   if (node.panoramas) {
     String(node.panoramas).split(',').forEach(function(panorama) {
-      infoWindow.innerHTML += '<img class="w-100 mv2" src="/panorama/'+panorama+'"></img>'
+      infoWindow.innerHTML += '<img class="w-100 mv2" src="../panorama/'+panorama+'"></img>'
     })
   }
   infoWindow.classList.add('db');
