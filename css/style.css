@@ -33,6 +33,11 @@ body {
   overflow: scroll;
 }
 
+#splash0 {
+  background-image: url('../images/splash0.jpg');
+  background-position: center center;
+}
+
 #splash1 {
   background-image: url('../images/splash1.jpg');
   background-position: center center;
@@ -74,7 +79,7 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
-  background-image: linear-gradient(rgba(17, 17, 17, 0),rgba(17, 17, 17, 1) 99%);
+  background-image: linear-gradient(rgba(17, 17, 17, 0),rgba(17, 17, 17, 0),rgba(17, 17, 17, 0.5),rgba(17, 17, 17, 0.75),rgba(17, 17, 17, 1) 99%);
   /*background: radial-gradient(rgba(0, 0, 0, 0.25), #111);*/
   opacity: 1;
 }

@@ -136,10 +136,7 @@ function initMap() {
     zoomControl: true,
     scrollwheel: false,
     streetViewControl: false,
-    mapTypeControlOptions: {
-      style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-      position: google.maps.ControlPosition.RIGHT_TOP
-    }
+    mapTypeControl: false
   };
 
   var map = new google.maps.Map(document.getElementById("map-div"), mapOptions);
@@ -155,24 +152,7 @@ function initMap() {
   potentialNodesLayer.loadGeoJson("./nodes/potential.json");
   linksLayer.loadGeoJson("./nodes/links.json");
   linkNYCLayer.loadGeoJson("./nodes/linkNYC.json");
-  // beamsLayer.addGeoJson({"type":"Feature","geometry":{"coordinates":[-74.001122,40.711137],"type":"Point"}});
 
-  /* activeNodesLayer.setStyle({
-		    icon: {
-		      url: '../assets/images/active.svg',
-		      anchor: new google.maps.Point(10, 10),
-		    }
-		  })
-		*/
-
-  //attempt at changing icon for each marker
-  /*
-		  activeNodesLayer.setStyle(function(feature) {
-		    return {icon:feature.getProperty('icon'),
-		    anchor: new google.maps.Point(10, 10),
-		    }
-		  })
-         */
 
   //changing icon opacity to show it has panoramas, also set supernode icon
   activeNodesLayer.setStyle(function(feature) {
@@ -221,16 +201,6 @@ function initMap() {
     };
   });
 
-  /*
-		  potentialNodesLayer.setStyle({
-		    icon: {
-		      url: '../assets/images/potential.svg',
-		      anchor: new google.maps.Point(10, 10),
-		    },
-		    zIndex: -1
-		  })
-          */
-
   linksLayer.setStyle(function(link) {
     var strokeColor = "#ff3b30";
     var opacity = 0.5;
@@ -240,7 +210,7 @@ function initMap() {
     }
     return {
       zIndex: 999,
-      strokeWeight: 2,
+      strokeWeight: 3,
       strokeColor: strokeColor,
       strokeOpacity: opacity
     };
@@ -260,14 +230,6 @@ function initMap() {
       }
     };
   });
-
-  // beamsLayer.setStyle({
-  //   icon: {
-  //     url: '../assets/images/supernode.svg',
-  //     anchor: new google.maps.Point(0, 0),
-  //   },
-  //   zIndex: -1
-  // })
 
   var infowindow = new google.maps.InfoWindow();
   activeNodesLayer.addListener("click", openInfoWindow);
@@ -323,7 +285,6 @@ function initMap() {
     infowindow.setPosition(event.feature.getGeometry().get());
     infowindow.setOptions({ pixelOffset: new google.maps.Size(-1, -8) });
     infowindow.open(map);
-    //setTimeout(infowindow.close(map), 0) // needs a timeout delay to force the autoscroll !!
     setTimeout(infowindow.open(map), 10000); // needs a timeout delay to force the autoscroll !!
   }
 }
