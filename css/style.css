@@ -84,6 +84,10 @@ body {
   opacity: 1;
 }
 
+.Installed {
+  color: red
+}
+
 #splash6 {
   background-image: url('../images/splash6.jpg');
   background-position: center center;
