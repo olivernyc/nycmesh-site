@@ -174,8 +174,16 @@ function initMap() {
       zIndex: 200,
       icon: {
         url: url,
-        anchor: new google.maps.Point(10, 10)
-      }
+        anchor: new google.maps.Point(10, 10),
+        labelOrigin: new google.maps.Point(28, 10)
+      },
+        // label: {
+        //   color: "#ff3b30",
+        //   fontSize: "14",
+        //   fontWeight: "bold",
+        //   paddingLeft: "20",
+        //   text: feature.getProperty("id"),
+        // }
     };
   });
 
@@ -197,7 +205,8 @@ function initMap() {
       zIndex: 100,
       icon: {
         url: url,
-        anchor: new google.maps.Point(10, 10)
+        anchor: new google.maps.Point(10, 10),
+        labelOrigin: new google.maps.Point(28, 10)
       }
     };
   });
@@ -246,10 +255,17 @@ function showDetails(event) {
   var node = event.feature.f
   currentNode = node
   var infoWindow = document.getElementById('infoWindow')
-  infoWindow.innerHTML = '<div class="flex items-center justify-between">'+'<h2 class="mv0">Node #'+node.id+'</h2>'+'<h3 class="mv0 '+node.status+'">'+node.status+'</h3>'+'</div>'
+  var statusString = node.id === 227 ? 'Supernode' : node.status || 'Potential'
+  infoWindow.innerHTML = '<div class="flex items-center justify-between">'+'<h2 class="mv0 near-black">Node #'+node.id+'</h2>'+'<h3 class="mv0 '+statusString+'">'+statusString+'</h3>'+'</div>'
+  if (node.notes) {
+    infoWindow.innerHTML += '<p class="f5 fw5 gray">'+node.notes+'</p>'
+  }
+  if (node.roof) {
+    infoWindow.innerHTML += '<p class="f5 fw5 green">'+'✓ Roof Access'+'</p>'
+  }
   if (node.panoramas) {
     String(node.panoramas).split(',').forEach(function(panorama) {
-      infoWindow.innerHTML += '<img class="w-100 mv2" src="/nycmesh-site/panorama/'+panorama+'"></img>'
+      infoWindow.innerHTML += '<img class="w-100 mv2" src="/panorama/'+panorama+'"></img>'
     })
   }
   infoWindow.classList.add('db');

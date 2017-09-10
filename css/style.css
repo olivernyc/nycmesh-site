@@ -84,8 +84,20 @@ body {
   opacity: 1;
 }
 
+.bright-green {
+  color: rgb(76, 217, 100)
+}
+
+.Potential, .Interested, .No {
+  color: #555
+}
+
 .Installed {
-  color: red
+  color: #ff3b30
+}
+
+.Supernode {
+  color: #007aff
 }
 
 #splash6 {
