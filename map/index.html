@@ -39,8 +39,23 @@
   </header>
 
   <div id="close" class="relative h-75">
-    <div id="infoWindow" class="ma4 dn absolute z-999 w6 bg-white shadow-1 br2 pa3"></div>
+    <form class="absolute z-999 ma3 w5 shadow-2 shadow-3">
+      <input
+        class="search fw4 f5  w-100 mw6 pv2 ph2 input-reset br2 bn bg-white"
+        placeholder="Search"
+        autoComplete="off"
+        spellCheck="off"
+        type="text"
+        onkeydown="if (event.keyCode == 13) { event.preventDefault(); event.stopPropagation(); initMap() }"
+        onkeyup="searchQuery = this.value"
+      />
+    </form>
+    <div id="infoWindow" class="ma3 dn absolute right-0 z-999 w6 bg-white shadow-1 br2 pa3"></div>
     <div id="map-div" class="h-100"></div>
+  </div>
+
+  <div id="lightbox" onclick="this.classList.add('dn'); this.classList.remove('fixed'); this.children[0].classList.add('dn'); this.children[0].src = ''" class="dn z-9999 top-0 left-0 bottom-0 right-0 flex justify-center items-center bg-near-black">
+    <img class="mh-100 contain" src=""></img>
   </div>
 
   <div class="bg-near-white pt4 pb5">

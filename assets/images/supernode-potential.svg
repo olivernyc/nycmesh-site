@@ -6,7 +6,6 @@
 
  <g>
   <title>Layer 1</title>
-  <circle cx="10" cy="10" r="8" stroke="#ffff00" stroke-width="2" fill="#7f7f7f" opacity="0.8" id="svg_1"/>
-  <text style="cursor: move;" fill="#000000" stroke-width="0" x="6.083355" y="13.79546" id="svg_4" font-size="8" font-family="Helvetica, Arial, sans-serif" text-anchor="start" xml:space="preserve" transform="matrix(2.1111257022223735,0,0,1.0997779277030229,-8.38034307468955,-2.0510115601476606) " stroke="#ffff00">S</text>
+  <circle cx="10" cy="10" r="8" fill="#007aff" opacity="0.4" id="svg_1"/>
  </g>
 </svg>
