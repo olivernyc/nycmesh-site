@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="./css/tachyons.min.css"/>
 </head>
 <body>
-  <header class="sans-serif">
+  <header>
     <div class="flex-ns justify-between items-center pv3 mw8-l mw7 center">
       <div class="ph0-ns ph2">
         <a class="nowrap dib link" title="Home" href="./">
@@ -37,36 +37,46 @@
   </header>
 
   <!-- Splash -->
-  <div id="splash0"  class="relative black-gradient cover h-50 bg-black">
+  <div id="splash0"  class="relative white-gradientt cover h-50 bg-white">
     <div  class="white h-100 tc flex items-center justify-center flex-column">
-      <h1 class="z-9999 f0-l f1 ph2 lh-title serif bg-blue-500 hg-100 u center">High speed. Low cost. Community owned.</h1>
+      <h1 class="z-9999 bg-blue f2 fw9 pv2 ph3 lh-title bg-blue-500 hg-100 u center">High speed. Low cost. Community owned.</h1>
     </div>
   </div>
 
-  <div class="near-white bg-near-black f4-ns f5 pv4 ph3 lh-copy flex-ns items-center flex-column">
+  <div class="near-black bg-white f4-ns f5 pv4 ph3 lh-copy flex-ns items-center flex-column">
     <p class="measure center">
-      NYC Mesh is a community owned network. Our network consists of Wi-Fi router "nodes" spread throughout the city. The network has no central server and no single internet service provider. All nodes cooperate in the distribution of data, also serving as a stand-alone network in case of emergencies or internet shutdown.
+      NYC Mesh is a community owned network.
+      <a class="link blue" href="/#join">Join our network</a> to replace your current internet connection.
+    </p>
+
+    <p class="measure center">
+      Our network consists of Wi-Fi router "nodes" and "supernodes" spread throughout the city. The network connects directly to the internet backbone, so we do not rely on an ISP. All of our network nodes cooperate in the distribution of data, and the network can also function independently in case of emergencies or internet shutdown.
     </p>
     <p class="measure center">
-      We aim to create a free, resilient, stand-alone communication system that serves both for daily use and also for emergencies—be it power outages or internet disruption—running software that helps our community with hyperlocal maps and events.
+      NYC Mesh is a neutral network that does not block or discriminate content. NYC Mesh does not collect, store, monitor, or log any user traffic or content that passes through our network.
+    </p>
+    <p class="measure center">
+      Our ASN is AS395853 and we connect to the DE-CIX internet exchange. Please <a href="mailto:peering@nycmesh.net" class="link blue">contact us to peer with our network.</a>
     </p>
     <div class="mv4-ns mv3 mh0 white">
-      <div class="dib ma0 mr4">
-      <a class="nowrap dib tc-ns pa3 hover-lightest-blue white br2 link bg-blue ttu f4-ns f5 fw5" title="Join" href="./#join">
-        Get connected
-      </a>
-    </div>
-    <div class="dib ma0 mt3 mt0-ns">
-      <a class=" dib tc-ns pa3 hover-near-white white br2 link bg-gray ttu f4-ns f5 fw5" title="Donate" href="./#donate">
-        Donate
-      </a>
-    </div>
+      <button class="dib pa0 ma0 mr4 bn bg-transparent">
+        <a class="nowrap dib tc-ns pa3 white br2 link bg-blue ttu f4-ns f5 fw6" title="Join" href="./#join">
+          Get connected
+        </a>
+      </button>
+      <div class="dib ma0 mt3 mt0-ns">
+        <button class="dib pa0 ma0 mr4 bn bg-transparent">
+        <a class="nowrap dib tc-ns pa3 white br2 link bg-light-silver ttu f4-ns f5 fw6" title="Join" href="./#join">
+          Donate
+        </a>
+      </button>
+      </div>
     </div>
   </div>
 
   <!-- Map -->
   <a id="map" class="no-underline" href='./map'>
-    <div class="bg-map h-25 w-100 cover">
+    <div class="bg-map h-33 w-100 cover">
       <div class=" white bg-red-75 flex items-center justify-center b-black bw2">
         <h2 class="ma0 f3-ns f5 white pv3 ph2 tc">We have over 60 active nodes! View the map.</h2>
       </div>
@@ -77,7 +87,7 @@
     <div class="mw9 center f4 ma3 flex-l justify-center">
 
       <div class="measure f4 ma3-ns pa3-ns ph2 lh-copy center">
-        <h1 class="serif lh-title f2-ns f3">Want to join the mesh?</h1>
+        <h1 class="lh-title f2-ns f3 fw7">Want to join the mesh?</h1>
         <p class="f4-ns f5">
           Let us know where you would like to install a node.
           We will reach out soon to discuss installation.
@@ -128,7 +138,7 @@
     <div class="flex center flex-row-ns flex-column  items-center-ns justify-center-ns">
       <img class="h5 w5 dn db-l pa4" src="./images/meetup.png"></img>
       <div class="measure f4-ns f5">
-        <h1 class="serif lh-title f2-ns f3">Get involved!</h1>
+        <h1 class="lh-title f2-ns f3 fw7">Get involved!</h1>
 
         <p>Our next meetup is on <time datetime="2017-02-07 19:00" class="b ts">February 7, 7:00 - 8:30 PM</time>.</p>
         <p>We will discuss ways you can expand the network. We need help installing on rooftops, organizing neighborhoods and getting funding. Come along and see how your skills can be best put to use.</p>
@@ -141,80 +151,80 @@
 
 <!-- Team -->
 <section class="pv4 ph3 bg-near-white">
-  <h1 class="lh-title f2-ns f3 serif tc-ns">Meet the team.</h1>
+  <h1 class="lh-title f2-ns f3 tc-ns">Meet the team.</h1>
   <p class="lh-copy measure center tc-ns f4-ns f5 pa0 ma0">NYC Mesh is a labor of love. All members are unpaid volunteers.</p>
   <div class="db flex">
   <ul class="list mw8 center pa0 dark-gray">
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/rb.jpg"></img>
+      <img class="br3 w-100" src="./images/team/rb.jpg"></img>
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Rachel Boyce</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/cavallo.jpg"></img>
+      <img class="br3 w-100" src="./images/team/cavallo.jpg"></img>
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Vinney Cavallo</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/jedahan.jpg"></img>
+      <img class="br3 w-100" src="./images/team/jedahan.jpg"></img>
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Jonathan Dahan</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/julien.jpg"></img>
+      <img class="br3 w-100" src="./images/team/julien.jpg"></img>
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Julien Deswaef</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/winston.jpg"></img>
+      <img class="br3 w-100" src="./images/team/winston.jpg"></img>
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Winston Ford</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/nonlinear.jpg"></img>
+      <img class="br3 w-100" src="./images/team/nonlinear.jpg"></img>
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Nicholas Frota</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/zach.jpg"></img>
+      <img class="br3 w-100" src="./images/team/zach.jpg"></img>
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Zach Giles</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/danjg.jpg"></img>
+      <img class="br3 w-100" src="./images/team/danjg.jpg"></img>
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Daniel Grinkevich</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/bhny.jpg"></img>
+      <img class="br3 w-100" src="./images/team/bhny.jpg"></img>
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Brian Hall</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/samuelhermann.jpg"></img>
+      <img class="br3 w-100" src="./images/team/samuelhermann.jpg"></img>
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Samuel Hermann</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/lisa.jpg"></img>
+      <img class="br3 w-100" src="./images/team/lisa.jpg"></img>
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Lisa Ly</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/robamichael.jpg"></img>
+      <img class="br3 w-100" src="./images/team/robamichael.jpg"></img>
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Rob Michael</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/c00w.jpg"></img>
+      <img class="br3 w-100" src="./images/team/c00w.jpg"></img>
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Colin Rice</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/nitinics.jpg"></img>
+      <img class="br3 w-100" src="./images/team/nitinics.jpg"></img>
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Nitin Sharma</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/cody.jpg"></img>
+      <img class="br3 w-100" src="./images/team/cody.jpg"></img>
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Cody Snider</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/ksnieck.jpg"></img>
+      <img class="br3 w-100" src="./images/team/ksnieck.jpg"></img>
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Kurt Snieckus</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/tatiana.jpg"></img>
+      <img class="br3 w-100" src="./images/team/tatiana.jpg"></img>
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Tatiana Tylosky</h2>
     </li>
     <li class="fl w-eighth-l w-20-m w-25 pa3-ns pa2">
-      <img class="br3 w-100 pointer" src="./images/team/azlyth.jpg"></img>
+      <img class="br3 w-100" src="./images/team/azlyth.jpg"></img>
       <h2 class="f5-ns f6 tc fw6 pa0 ma0 mv1 pointer">Peter Valdez</h2>
     </li>
   </ul>
@@ -223,7 +233,7 @@
 
 <!-- Donate -->
 <section id="donate" class="bt bb b--light-gray bg-white pv4 ph3 f4 near-black">
-  <h1 class="lh-title f2-ns f3 serif tc-ns">We need your help.</h1>
+  <h1 class="lh-title f2-ns f3 fw7 tc-ns">We need your help.</h1>
   <p class="lh-copy measure center dark-gray f4-ns f5">We are always in need of new hardware to extend the network. If you can afford to help, please do!</p>
   <div>
     <ul class="list flex-ns pa0 justify-center center overflow-auto t">
@@ -290,13 +300,13 @@
           <!-- <div class="pointer pa3 bg-near-white ba bw1 b--light-gray br2">
             $100
           </div> -->
-          <input placeholder="$" value="$" type="text" class="relative input-reset fw5 sans-serif tc w-100 bg-near-white ba bw1 b--light-gray br1 pa3"></input>
+          <input placeholder="$" value="$" type="text" class="relative input-reset fw5 tc w-100 bg-near-white ba bw1 b--light-gray br1 pa3"></input>
         </label>
       </div>
     </div>
     <div class="mw6 center tc">
       <div class="pv3 ph3-ns ph2 w-third-ns w-100 center">
-        <a class="db pa3 bg-gold br2 ttu white fw5 pointer white-gradient hover-50">
+        <a class="db pa3 bg-gold br2 ttu white fw5 pointer hover-50">
           Donate
         </a>
       </div>
