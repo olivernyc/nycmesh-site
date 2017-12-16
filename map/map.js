@@ -18,7 +18,7 @@ function initMap() {
       elementType: "labels.text.fill",
       stylers: [
         {
-          color: "#AAAAAA"
+          color: "#777777"
         }
       ]
     },
@@ -40,7 +40,7 @@ function initMap() {
       "elementType": "labels",
       "stylers": [
         {
-          "visibility": "off"
+          // "visibility": "off"
         }
       ]
     },
@@ -103,15 +103,6 @@ function initMap() {
       ]
     },
     {
-      featureType: "road.highway",
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#dadada"
-        }
-      ]
-    },
-    {
       featureType: "transit",
       stylers: [
         {
@@ -124,7 +115,7 @@ function initMap() {
       elementType: "geometry",
       stylers: [
         {
-          color: "#d9d9d9"
+          color: "#d9dde6"
         }
       ]
     },
@@ -133,7 +124,7 @@ function initMap() {
       elementType: "labels.text.fill",
       stylers: [
         {
-          color: "#9e9e9e"
+          color: "#777777"
         }
       ]
     }
